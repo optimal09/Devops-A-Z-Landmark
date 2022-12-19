@@ -1,0 +1,728 @@
+Please, don't download or share any BootCamp videos. 
+Please, don't share any BootCamp running notes, etc. 
+
+Sensitive resources shall be shared during our bootCamp sessions
+and I trust and count on your honest corporations & confidentially. 
+
+
+MODULES:
+  Linux Commands
+    Files / Dir mgt
+      touch / echo / cat > test / vi / vim / nano 
+      mkdir -vp 
+      chmod / chown /  400 
+      400 root:root /opt/sonar/bin/sonar.sh
+      chmod 777 -R /opt/sonar/bin/sonar.sh  
+      chown sonar:SonarQube -R /opt/sonar/bin/sonar.sh 
+      777 root:root /opt/sonar/bin/sonar.sh
+      sh /opt/sonar/bin/sonar.sh
+      grep / grep -i / 
+      pipe(|) = cat list | grep -i simon | tr 
+
+      / sort / cat / more / less / tr
+      head / tail / cp / ln / ln -s / mv / rm / rmdir / find / sed / cut- awk
+      scp / tar / zip / unzip 
+    
+      list = Simon Legah / simon peter / Simon Nji 
+          grep simon list 
+    users mgt
+       useradd / adduser / passwd / usermod / userdel 
+       su / su - / sudo -i / sudo -u simon 
+       groupadd (engineers / dev / testers) / groupdel 
+         usermod -G docker ubuntu 
+         usermod -G engineers BODE 
+         usermod -G dev olaide  
+    package mgt 
+      yum install/update/upgrade/remove -y    
+      wget 
+      apt install/update/upgrade/remove -y 
+      choco install/update/upgrade/remove  -y 
+      rpm 
+      pip 
+    system mgt - monitoring  
+       cat /etc/os-releases
+       uname
+       df -h / 
+       free
+       top 
+       ps 
+       ps -ef 
+       kill -9 
+       netstat -tulpn
+       jobs 
+       uptime 
+       last 
+       w 
+       who
+
+       cat /proc/meminfo
+       cat /proc/cpuinfo
+       /var/logs/messages
+       /var/logs/secure 
+    GUI / CLI /  
+  Scripting  
+    bash shell Scripting 
+    python Scripting  
+     what does $#, $@, $?, $$,  means in Scripting
+     if [ $# == 3 ] then
+      $? == 0 means ok 
+      $? != 0 (1 - 127)
+    echo / 
+    conditions (if, else, fu)
+    functions 
+    switch cases 
+       sonar.sh start | stop | resart | status 
+    comments -- easily reusable/understandable  
+
+  versioning = Git 
+     config 
+     init / add / status / stash / commit /
+        working area / staging area / localRepo / remoteRepo 
+                    add           commit      push   ---->
+                                                        <----
+     olaide - Julius                                                      
+      clean / reset // revert
+     fetch / pull / clone / push / git remote add 
+     diff / merge / rebase / cherry-pick  / pull request 
+     show / log / checkout / branch / tag /  
+       dev (5commits) / master / 
+Git and Github best practices:
+1. Branching strategy 
+  branches:       Environments:
+  dev -->        development 
+  stage -->      staging/testing/UAT/Pre-PRODUCTION 
+  master -->     PRODUCTION 
+    bug_fixed
+    feature_uf
+
+2. READme.md file 
+
+3. never merge directly to the master
+   master branch commits must go through pull requests
+
+4. Always use good commit messages
+
+5. Use Rebase Over Merge
+
+6. Git diff before git commit 
+
+7. Avoid merge conflict 
+
+
+  SCM - Github / bitBucket / GitLab / codeCommit  
+  Code Build - Maven / CodeBuild / ANt / Gradle / MSBuild / 
+    mvn 
+  Code Quality - SonarQube 
+  Artifactory - Nexus / JForg / CodeArtifacts
+  CI/CD - Jenkins
+      ci /  CT  / cd / cd / c-dev / c-m / cs 
+     td-app:
+       continuous integration--> build--test--release  
+       continuous delivery/deployment --deploy application to Environments 
+       continuous monitoring ---> APM
+           NewRelic / dataDog / Nagios / Splunk/ sensu/zabbix
+           Prometheus / Grafana / CloudWatch / Dynatrace 
+           Log Management and data analytics:
+              EFK / ELK / Splunk 
+       shared libraries :
+          free-style (pom.xml )
+            software-builds 
+            data-backup 
+            server monitoring
+          maven -- (td.xml)
+             mvn package -f td.xml 
+             mvn package, builds using pom.xml 
+          pipelines
+             Jenkinsfile / groovy script 
+             
+             node{
+              stage("1.GetCode"){
+                git clone 
+              }
+              stage("2.Build") {
+                sh "mvn package"
+              }
+              stage("3.CodeQuality"){
+                sh "sh sonar:sonar"
+              }
+              stage("4.UploadArtifacts"){
+                sh "mvn deploy" 
+              }
+              stage("5.DeployToTesting"){
+                step("DockerBuild"){
+                  sh "docker build -t app ."
+                }
+                step("DockerPush"){
+                  sh "docker login -u mylandmarktech -p $dockerhub"
+                }
+                step("Deploy"){
+                  sh "kubectl apply -n testing"
+                }
+
+              }
+              stage("6.Approval") {
+                sh  "echo 'please proceed'"
+              }
+              stage("7.DeployToProd."){
+                sh "kubectl apply -n prod"
+              }
+              stage("8.EmailNotification"){
+
+              }
+             }
+
+          multi-branch pipeline  
+             dev 
+             stage 
+             master 
+
+
+                  
+  APM - NewRelic 
+    http://44.192.107.173:8080/myapps/services/employee/getEmployeeDetails
+    http://44.192.107.173:8080/myapps/services/employee/getCustomersDetails
+    http://44.192.107.173:8080/myapps/services/employee/getBankAccountDetails
+    http://44.192.107.173:8080/myapps/services/employee/getLoginDetails
+    http://44.192.107.173:8080/myapps/services/employee/getTransferDetails
+
+{
+  "Calling Name": "mylandmark",
+  "DOB": "May 1, 2005",
+  "Places he like": "Africa, NA, Bali",
+  "Hobbies": "Praying, Singing, Reading Technical Blogs,
+              Teaching, Helping to Poor People..",
+  "Name": "Landmark Technologies"
+}
+http://td.com 
+https://td.com 
+HTTP Methods:
+  GET
+  POST -- Edit 
+  PUT
+  HEAD
+  DELETE
+  PATCH
+  OPTIONS
+
+Now that you have a high-level understanding of HTTP status codes,
+ we will look at the commonly encountered errors.
+400 Bad Request. ...
+401 Unauthorized. ...
+403 Forbidden. ...
+404 Not Found. ...
+500 Internal Server Error. ...
+502 Bad Gateway. ...
+503 Service Unavailable. ...
+504 Gateway Timeout.
+
+https://www.w3schools.com/tags/ref_httpmethods.asp
+
+https://www.w3schools.com/tags/ref_httpmethods.asp
+
+How and where are applications deployed??
+ Physical servers 
+ virtual manchines 
+ or containers 
+  Containerisation - Docker 
+  we deploy stateless and statefull micro-service applications 
+  images and containers 
+     Dockerfile = 
+       FROM tomcat / COPY . .  / ADD / EXPOSE 8080  / 
+       USER tomcat (default user=root ) / WORKDIR / CMD / ENTRYPOINT 
+       ENV / MAINTAINER / RUN / LABEL / 
+       docker run -p 600:8000 
+    docker build -t image1 . 
+
+     run ( create / start )
+     create / start / stop / pause / unpause / restart / kill 
+     troubleshoot:
+       logs / inspect / stats / exec / 
+     volumes and 
+       bind mount &
+       persistent volumes
+       docker volume create datas 
+         docker run -v datas:/data/db 
+     networks
+      create / connect / disconnect / 
+        bridge default and
+          containers uses ContainerIPs to communicate 
+        bridge custom 
+          containers uses ContainerIPs/Names to communicate
+        host 
+        none 
+     push 
+     pull 
+     rm rmi scan search, history 
+     ps 
+     ps -a 
+     login 
+     images and containers  
+  Container orchestration -
+    kubernetes
+      kubeadm / kops / eks 
+       application deployment 
+       helm 
+       RBAC 
+       Prometheus - Grafana 
+       Elastic Stack = EFK  
+    Docker swarm 
+  AWS - 
+  IaC - Terraform 
+  Configuration mgt - Ansible                           
+
+class25BootCamp - DevOps processes - Dec 7, 2021 
+================================================
+https://class26devops.s3.amazonaws.com/session1-dec7.mp4 
+
+class25BootCamp - Youmbi, Olusegun, Fusi projects presentations
+================================================----------------
+https://class26devops.s3.amazonaws.com/Youmbi.Fusi.mp4
+
+
+Please, don't download or share any BootCamp videos. 
+Please, don't share any BootCamp running notes, etc. 
+
+Sensitive resources shall be shared during our bootCamp sessions
+and I trust and count on your honest corporations & confidentially. 
+
+==============================================================
+
+audit.log0
+audit.log1
+audit.log2 
+
+ghp_ykj9tkRKEeejLf69N3GEKsiBhjGNXMYO2y1AnV
+
+=====================================================
+
+https://github.com/myLandmark-Technology/spring-boot-docker
+
+Managing a java-based application:
+     This a federated micro-service application 
+
+CI --> Git --> Jenkins --> Maven --SonarQube --Nexus 
+       Code --Build and Test and Release  
+
+CD --> Jenkins -- Ansible  
+                      Docker (build & push)
+                      kubernetes (deployment)
+
+
+http://18.212.53.48:5555/view/health/
+  
+Jenkins uses plugins to extend it functionality 
+1. Clone/pull/fetch code from gitHub 
+      Possible by:
+        create Github credentials in jenkins (private repo)
+           userName: mylandmark 
+           password: PAT (@344556&&****-___==*&^%$#@!) 
+2. build WITH Maven
+   1. Global tool Configuration 
+       Go to manage jenkins 
+           Go to Global tool Configuration 
+              choose the maven version
+
+   2. Maven slave server ()
+        restrict where this project can be run 
+            SSHAgent plugins
+         1. code was clone from github
+         2. fetch / pull
+             searches for new commits/changes found in the remote repo
+
+3. SonarQube CodeQuality report  = sonar:sonar 
+     edit pom.xml properties tag  
+
+     open SonarQube port 9000 in the firewall to allow code analysis requests from the build server 
+
+4. UploadArtifacts into Nexus
+    edit pom.xml destribution Management tag with Nexus repository details
+    edit settings.xml server tag with nexus server detials 
+    open nexus port 8081 in the firewall to allow code Artifacts uploads 
+
+CI is done once we upload Artifacts into nexus  --> 
+
+Jenkins Ansible integration:
+  plugins:
+    publish over ssh plugins 
+      configure ssh servers
+        configure system 
+[k8s] 172.31.88.140
+[docker] 34.203.215.174
+[jenkins] 18.212.53.48
+[webserver] 172.31.88.166
+[db]
+ansible  172.31.15.31
+
+
+
+  jar/war/ear Artifacts are created 
+
+  export ANSIBLE_HOST_KEY_CHECKING=False
+
+  export ANSIBLE_HOST_KEY_CHECKING=True 
+
+https://docs.ansible.com/ansible/latest/user_guide/connection_details.html
+
+
+Deployment:
+  Jenkins can deploy to target Environments using plugins 
+
+  Jenkins can deploy Artifacts into Ansible and Ansible manages the deployment process 
+
+
+Build 
+  src/main & pom.xml 
+Test 
+  src/test
+  SonarQube report 
+Release 
+  Nexus remote repository 
+Deployment:
+=# Ansible-Playbook = deploy_pb.yml
+=# target/*jar/war/ear
+=# Dockerfile 
+=#Kuber-manifest = myapp.yml 
+Deployment Environments:
+VMs of Containers 
+  tomcat/JBoss (vm-ec2/Java/tomcat/app.war ) = 
+                32GB / 80GB heavy weight 
+                monolithic applications
+
+  Docker images (application code + dependencies) 
+                1GB/ 5GB 
+                micro-service 
+                monolithic applications
+  
+    Build + TEST + Release 
+        we Build docker images  
+        Push images to registry
+           dockerhub 
+           Nexus/JForg 
+           amazon ECR 
+           DTR  
+        deploy to target Environment using kubernetes 
+            kubectl apply/create/  = declarative (file= kube-manifest)
+            kubectl run == imperative 
+
+  LIGHT weight
+
+s3 
+ebs 
+efs 
+eks 
+vpc 
+ec2 
+   185 + 25% = 185 * 1.25
+   145 + 20% = 145 * 1.2 
+GitOps actions 
+   BitBucket 
+   GitLab 
+   Github
+            1/72*100 = 1.4% 
+200% 
+  satisfactory 
+
+coding 
+Developers = Career 
+CI/CD 
+Terraform 
+   400,000
+
+Apache Kafka 
+=================
+ansible-playbook deploy_pb.yml
+ansible dbservers -m ping   
+- hosts: docker-engine
+  tasks:
+  - name: create docker image using war file
+    shell: docker build -t mylandmarktech/springapp .
+    ignore_errors: yes
+
+  - name: push image on to dockerhub
+    shell: docker push mylandmarktech/springapp
+    ignore_errors: yes
+
+  - name: remove docker images form ansible server
+    shell: docker rmi mylandmarktech/springapp:latest
+    ignore_errors: yes
+
+- hosts: k8s
+  tasks:
+  - name: create a deployment
+    shell: kubectl apply -f myapp.yml
+
+ 1,2,3,4,5,6,..n     
+      docker build -t image2 
+      docker duild -t image2 
+
+free-style project pipeline
+
+myapp.yml 
+=====================
+/*
+stateless java application developed 
+  using the springboot framework
+  custom images 
+      mylandmarktech/springapp (scanning )
+  default/open opensource 
+      mongo (scanning )
+Needs a stateful mongodb database apps 
+*/
+# Complete Manifest Where in single yml we defined Deployment & Service for SpringApp & PVC(with default  StorageClass),ReplicaSet & Service For Mongo.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springappdeployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: springapp
+  template:
+    metadata:
+      name: springapppod
+      labels:
+        app: springapp
+    spec:
+      containers:
+      - name: springappcontainer
+        image: mylandmarktech/spring-boot-mongo
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGO_DB_USERNAME
+          value: devdb
+        - name: MONGO_DB_PASSWORD
+          value: devdb@123
+        - name: MONGO_DB_HOSTNAME
+          value: mongo 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springapp
+spec:
+  selector:
+    app: springapp
+  ports:
+  - port: 80
+    targetPort: 8080
+    nodePort: 30030
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodbpvc 
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 16Gi
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mongodbrs
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+     metadata:
+       name: mongodbpod
+       labels:
+         app: mongodb
+     spec:
+       volumes:
+       - name: pvc
+         persistentVolumeClaim:
+           claimName: mongodbpvc     
+       containers:
+       - name: mongodbcontainer
+         image: mongo
+         ports:
+         - containerPort: 27017
+         env:
+         - name: MONGO_INITDB_ROOT_USERNAME
+           value: devdb
+         - name: MONGO_INITDB_ROOT_PASSWORD
+           value: devdb@123
+         volumeMounts:
+         - name: pvc
+           mountPath: /data/db   
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo
+spec:
+  type: ClusterIP
+  selector:
+    app: mongodb
+  ports:
+  - port: 27017
+    targetPort: 27017
+
+==============
+#Dockerfile
+# mvn package 
+FROM openjdk:8-alpine
+RUN apk update && apk add /bin/sh
+RUN mkdir -p /opt/app
+ENV PROJECT_HOME /opt/app
+COPY target/spring-boot-mongo-1.0.jar $PROJECT_HOME/spring-boot-mongo.jar
+WORKDIR $PROJECT_HOME
+CMD ["java" ,"-jar","./spring-boot-mongo.jar"]
+  
+  docker build 
+  CMD: kubectl run/create/apply 
+       docker run 
+
+docker build -t image2 . 
+
+docker build -t mylandmark/spring-boot-mongo .  
+
+
+
+
+- hosts: docker
+  become: true
+  - name: create docker image using war file
+    shell: docker build -t mylandmarktech/springapp .
+    ignore_errors: yes
+
+  - name: push image on to dockerhub
+    shell: docker push mylandmarktech/springapp
+    ignore_errors: yes
+
+  - name: remove docker images form ansible server
+    shell: docker rmi mylandmarktech/springapp:latest 
+    ignore_errors: yes
+
+- hosts: k8s 
+  #become: true
+  #user: ubuntu
+  tasks: 
+  - name: create a deployment
+    command: kubectl apply -f myapp.yml 
+    ignore_errors: yes
+ 
+  - name: update deployment with new pods if image updated in dockerhub
+    command: kubectl rollout deployment springbootdeployment 
+    ignore_errors: yes
+
+
+------
+
+- hosts: docker
+  become: true
+  tasks:
+  - name: copy Dockerfile
+    copy:
+      src: Dockerfile
+      dest: /home/ansible/
+    ignore_errors: yes
+  - name: copy target
+    copy:
+      src: 
+      dest:
+  - name: create docker image using war file
+    shell: docker build -t mylandmarktech/springapp /home/ansible/
+    ignore_errors: yes
+  - name: push image on to dockerhub
+    shell: docker push mylandmarktech/springapp
+
+  - name: remove docker images form ansible server
+    shell: docker rmi mylandmarktech/springapp:latest
+    ignore_errors: yes
+
+- hosts: k8s
+  #become: true
+  #user: ubuntu
+  tasks:
+  - name: copy kube-manifest
+    copy:
+      src: myapp.yml
+      dest: /home/ansible
+  - name: create a deployment
+    command: kubectl apply -f myapp.yml
+
+  - name: update deployment with new pods if image updated in dockerhub
+    command: kubectl rollout deployment springbootdeployment
+    ignore_errors: yes
+
+
+=================
+bootCamp videos:
+
+class25BootCamp - DevOps processes - Dec 7, 2021 
+================================================
+https://class26devops.s3.amazonaws.com/session1-dec7.mp4 
+
+class25BootCamp - Youmbi, Olusegun, Fusi projects presentations
+================================================----------------
+https://class26devops.s3.amazonaws.com/Youmbi.Fusi.mp4
+
+
+class25BootCamp - Dec 14, 2021 
+Jenkins-Ansible/kubernetes integration 
+-------------------------------------------------
+https://class26devops.s3.amazonaws.com/bootCamp25-session2-Dec14
+
+
+Interview Process:
+  1. Call from a recuiter / company 
+      https://www.linkedin.com/in/manpreet-kaur-97787b168/
+
+  2. Salary expectation 
+       Contract:     $80-$85/hr 
+                           $70
+                     7,684 BI-WEEKLY 
+       W2 CONTRACT: 
+       Full-time: 145k - 155k/yr 
+                  145+20%  185+25%
+                     Canada 38% 
+                     US     35%   
+     Flexible 
+
+  3. Landmark address 
+
+        Bachelors LMU 
+        Computer Engineering 
+
+  4. Technical Interview(s)
+
+  5. Behavioral Interview 
+
+
+Please describe your experience with creating Terraform modules 
+  Terraform:
+    main.tf 
+    provider aws {
+      region = "us-east-1" 
+      profile = "simon"
+    }
+    resources
+    resources_aws.vpc {
+
+    }
+    subnets 
+    route-tables 
+    igw  
+    s3 
+    ec2 
+    route53 
+    sg 
+    LB 
+    EKS 
+
+    modules are stored locally or in a remoteRepo 
+
+    main.tf 
+
+    module "vpc" {
+      source = "terraform-aws-modules/vpc/aws"
+
+    }
